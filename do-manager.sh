@@ -1,4 +1,4 @@
-#!/data/data/com.termux/files/usr/bin/bash
+#!/bin/bash" ;;
 
 # Fungsi untuk memvalidasi API Key
 validate_api_key() {
@@ -66,7 +66,7 @@ show_droplet_list() {
     .droplets[] | 
     {name: .name, public_ip: (.networks.v4[] | select(.type == "public").ip_address), os: .image.distribution, size_slug: .size.slug, created_at: .created_at} |
     "\(.name) \(.public_ip) \(.os) \(.size_slug) \(.created_at)"' | 
-    count=0 while read -r droplet_name droplet_ip droplet_os droplet_size_slug droplet_created_at; do
+    while read -r droplet_name droplet_ip droplet_os droplet_size_slug droplet_created_at; do
         droplet_size=$(size_map "$droplet_size_slug")
         printf "%-4s %-12s %-15s %-15s %-12s %-10s\n" \
             "$((++count))." "$droplet_name" "$droplet_ip" "$droplet_os" "$droplet_size" "${droplet_created_at:0:10}"
